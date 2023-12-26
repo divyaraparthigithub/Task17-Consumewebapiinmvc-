@@ -1,0 +1,75 @@
+﻿@*@model List<Product>*@
+@model X.PagedList.IPagedList<Product>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Product List";
+}
+<style>
+    a{
+        text-decoration:none;
+    }
+</style>
+<h2>Product List</h2>
+<div>
+    <form asp-action="ProductList" asp-controller="Home" method="get">
+<p>
+    Search: <input type="text" name="searchString" value="@ViewBag.SearchString" />
+    <input  type="submit" value="Search" />
+</p></form>
+</div>
+
+<table class="table" id="product">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.id</td>
+                <td>@product.name</td>
+                <td>@product.price</td>
+                <td>@product.quantity</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = product.id })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = product.id })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*<div>
+    Page @(Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))
+</div>*@
+<div style="display: flex;">
+    @if (Model.HasPreviousPage)
+    {
+        <button class="btn1"><a href="@Url.Action("ProductList", new { page = Model.PageNumber - 1@* sortOrder = ViewBag.CurrentSort, searchString = ViewBag.SearchString*@ })">previous</a></button>
+    }
+    else
+    {
+        <button class="btn1"> <span>Previous</span></button>
+    }
+
+    <span class="px-2">Page @(Model.PageNumber) of @Model.PageCount</span>
+
+    <span class ="px-2">@Html.PagedListPager(Model, page => Url.Action("ProductList", new { page }))</span>
+
+    @if (Model.HasNextPage)
+    {
+        <button class="btn1"><a href="@Url.Action("ProductList", new { page = Model.PageNumber + 1@*, sortOrder = ViewBag.CurrentSort, searchString = ViewBag.SearchString*@ })">next</a></button>
+    }
+    else
+    {
+        <button class="btn1"> <span>Next</span></button>
+    }
+</div>
+
+
+
+

@@ -1,0 +1,22 @@
+﻿@model Product
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+    <table class="table">
+        <tr>
+            <td>Name:</td>
+            <td><input asp-for="name" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input asp-for="price" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>Quantity:</td>
+            <td><input asp-for="quantity" class="form-control" /></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+</form>

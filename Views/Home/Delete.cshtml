@@ -1,0 +1,29 @@
+﻿@model Product
+<html>
+<head>
+    <title>
+        Delete Customer
+    </title>
+</head>
+<body>
+    <h1>Delete Customer</h1>
+    <form method="post" action="@Url.Action("Delete","Home")">
+        <input type="hidden" name="customerId" value="@Model.id" />
+        <div>
+            <p>
+                Are you sure you want to delete the customer the customer <strong>@Model.name</strong>
+            </p>
+        </div>
+        <div>
+
+            <button >Delete</button>
+        </div>
+        <div>
+            <a asp-action="ProductList">cancel</a>
+        </div>
+        <div>
+
+            <a asp-action="ProductList">Back to List</a>
+        </div>
+    </form>
+</body>
